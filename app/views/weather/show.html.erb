@@ -1,0 +1,22 @@
+<h1>Weather Application</h1>
+
+<%= form_with url: weather_show_path, method: :get, local: true do |form| %>
+  <div>
+    <%= form.label :city, "Enter City:" %>
+    <%= form.text_field :city, value: @city %>
+  </div>
+  <div>
+    <%= form.submit "Get Weather" %>
+  </div>
+<% end %>
+
+<% if @weather %>
+  <% if @weather.success? %>
+    <h2>Weather for <%= @city %></h2>
+    <p>Temperature: <%= @weather['current']['temp_c'] %>°C</p>
+    <p>Condition: <%= @weather['current']['condition']['text'] %></p>
+    <p>Humidity: <%= @weather['current']['humidity'] %>%</p>
+  <% else %>
+    <p>Unable to fetch weather data.</p>
+  <% end %>
+<% end %>
